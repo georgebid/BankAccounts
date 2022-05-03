@@ -16,20 +16,24 @@ namespace MyBank
                        * 3. Need to overwrite the current pin and replace with this one.
                        * 4. Confirm that the pin is good.
                        */
-            BankAccount bankAccount = new BankAccount();
+           
 
             Console.WriteLine("What would you like your new PIN to be?");
             string requestedPin = Console.ReadLine();
 
-            if (bankAccount.Pin == Int32.Parse(requestedPin))
+            if (AuthedAccount.Pin == Int32.Parse(requestedPin))
             {
                 Console.WriteLine("You cannot update your pin to your existing pin.");
             }
             if (requestedPin.Length == 4)
             {
                 int newPin = Int32.Parse(requestedPin);
-                newPin = bankAccount.NewPin;
-                bankAccount.Pin = bankAccount.NewPin;
+                AuthedAccount.Pin = newPin;
+
+                Database database = new Database(AuthedAccount);
+
+                database.Write();
+
                 Console.WriteLine("Your pin has been updated.");
             }
             else

@@ -10,6 +10,17 @@ namespace MyBank
         public string Pin { get; }
         public string AccountNumber { get; set; }
         public decimal Balance { get; set; }
+        public int NewPin { get; set; }
+
+        public BankAccount AuthedAccount { get; set; }
+        public Database(BankAccount account)
+        {
+            AuthedAccount = account;
+        }
+        public Database()
+        {
+
+        }
 
         string bankAccounts = @"C:\Users\Georgina.Bidder\.vscode\accounts.csv";
         public List<BankAccount> Read()
@@ -42,7 +53,46 @@ namespace MyBank
                 }
             }
             return accounts;
-            //
         } 
+        public void Write()
+        {
+           
+            List<String> usersAccounts = new List<string>();
+
+            if (File.Exists(bankAccounts))
+            {
+                using (StreamReader reader = new StreamReader(bankAccounts))
+                {
+                    String usersAccount;
+
+                    while ((usersAccount = reader.ReadLine()) != null)
+                    {
+                        if (usersAccount.Contains(","))
+                        {
+                            // creates a new array called Split and splits up the data.
+                            // "123, 1234, 30000"
+                            // Split = ["123", "1234", "30000"];
+
+                            String[] split = usersAccount.Split(',');
+
+                            if (split[0] == AuthedAccount.AccountNumber.ToString())
+                            {
+                                split[1] = AuthedAccount.Pin.ToString();
+                                // join is doing the reverse of split so it can be read by the CSV file again.
+                                usersAccount = String.Join(",", split);
+                            } 
+                        }
+                        usersAccounts.Add(usersAccount);
+                    }
+                }
+
+                using (StreamWriter writer = new StreamWriter(bankAccounts, false))
+                {
+                    foreach (String account in usersAccounts)
+                        writer.WriteLine(account);
+                }
+            }
+        }
+       
     }
 }

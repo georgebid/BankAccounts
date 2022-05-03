@@ -10,8 +10,7 @@ namespace MyBank
         public int Pin { get; set; }
         public int AccountNumber { get; set; }
         public decimal Balance { get; set; }
-
-        public int NewPin { get; set; }
+        //public int NewPin { get; set; }
 
         public BankAccount(int accountNum, int pin, decimal initialBalance)
         {

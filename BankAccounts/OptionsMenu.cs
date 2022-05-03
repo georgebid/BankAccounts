@@ -18,45 +18,42 @@ namespace MyBank
         public OptionsMenu(BankAccount account)
 
         {
-            account = AuthedAccount;
+            AuthedAccount = account;
         }
 
         ChangePin changePin = new ChangePin();
         CheckBalance checkBalance = new CheckBalance();
 
-        public string Option()
+        public void Option()
         {
             Console.WriteLine("What would you like to do?");
             string usersChoice = Console.ReadLine();
             
-            foreach (char choice in usersChoice)
-            {
+                
                 if (Options.Contains(usersChoice))
                 {
                     Console.WriteLine($"You have chosen {usersChoice}");
+
+                    //if (choice.ToString() == "View Balance")
                     if (usersChoice == "View Balance")
                     {
                         checkBalance.Balance(AuthedAccount);
                     }
-                    else if (usersChoice == "Change Pin")
+                    //if (choice.ToString() == "Change Pin")
+                    if (usersChoice == "Change Pin")
                     {
                         changePin.UpdatePin(AuthedAccount);
+                    } 
+                else
+                    {
+                        Console.WriteLine("That is not an option.");
                     }
-                    break;
-
                 }
-                if (!Options.Contains(choice.ToString()))
-                {
-                    Console.WriteLine("That is not an option.");
-                    break;
-                }
-
-            }
+                
             //else if (userInput == "Withdraw")
             //{
             //    Withdraw();
             //}
-           return usersChoice;
         }
     }
 }
