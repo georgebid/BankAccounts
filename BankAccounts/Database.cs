@@ -78,6 +78,7 @@ namespace MyBank
                             if (split[0] == AuthedAccount.AccountNumber.ToString())
                             {
                                 split[1] = AuthedAccount.Pin.ToString();
+                                split[2] = AuthedAccount.Balance.ToString();
                                 // join is doing the reverse of split so it can be read by the CSV file again.
                                 usersAccount = String.Join(",", split);
                             } 

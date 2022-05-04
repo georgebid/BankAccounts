@@ -8,11 +8,11 @@ namespace MyBank
     {
         List<string> Options = new List<string>()
         {
-            "Withdraw",
-            "Deposit",
-            "View Balance",
-            "Change Pin",
-            "Cancel"
+            "withdraw",
+            "deposit",
+            "view Balance",
+            "change Pin",
+            "cancel"
         };
         public BankAccount AuthedAccount { get; set; }
         public OptionsMenu(BankAccount account)
@@ -23,37 +23,46 @@ namespace MyBank
 
         ChangePin changePin = new ChangePin();
         CheckBalance checkBalance = new CheckBalance();
+        Deposit deposit = new Deposit();
 
         public void Option()
         {
-            Console.WriteLine("What would you like to do?");
+            Console.WriteLine("What would you like to do? \n \n - Withdraw \n - Deposit \n - View Balance \n - Change Pin \n - Cancel ");
             string usersChoice = Console.ReadLine();
-            
-                
-                if (Options.Contains(usersChoice))
-                {
-                    Console.WriteLine($"You have chosen {usersChoice}");
 
-                    //if (choice.ToString() == "View Balance")
-                    if (usersChoice == "View Balance")
-                    {
-                        checkBalance.Balance(AuthedAccount);
-                    }
-                    //if (choice.ToString() == "Change Pin")
-                    if (usersChoice == "Change Pin")
-                    {
-                        changePin.UpdatePin(AuthedAccount);
-                    } 
-                else
-                    {
-                        Console.WriteLine("That is not an option.");
-                    }
+            if (Options.Contains(usersChoice.ToLower()))
+            {
+                Console.WriteLine($"You have chosen to {usersChoice}");
+
+                //if (choice.ToString() == "View Balance")
+                if (usersChoice == "View Balance")
+                {
+                    checkBalance.Balance(AuthedAccount);
                 }
-                
-            //else if (userInput == "Withdraw")
-            //{
-            //    Withdraw();
-            //}
+                //if (choice.ToString() == "Change Pin")
+                if (usersChoice == "Change Pin")
+                {
+                    changePin.UpdatePin(AuthedAccount);
+                }
+                if (usersChoice == "Cancel")
+                {
+                    Console.WriteLine("Transaction cancelled.");
+                    Console.Beep();
+                }
+                if (usersChoice == "Deposit")
+                {
+                    deposit.depositMoney(AuthedAccount);
+                }
+            }
+            else            {
+                Console.WriteLine("That is not an option.");
+            }
+
         }
+
+        //else if (userInput == "Withdraw")
+        //{
+        //    Withdraw();
+        //}
     }
 }
