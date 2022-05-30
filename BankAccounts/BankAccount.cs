@@ -21,16 +21,7 @@ namespace MyBank
         public BankAccount()
         {
 
-        }
-        // actions listed out in the requirements - make deposits. This is a method.
-        public void MakeDeposit(decimal amount, DateTime date, string note)
-        {
-        }
-
-        // action listed out in the requirements - make withdrawals. This is a method.
-        public void MakeWithdrawal(decimal amount, DateTime date, string note)
-        {
-        }
+        }  
     }
 }
 /* Bank rules: has a 3 digit unique bank account number.

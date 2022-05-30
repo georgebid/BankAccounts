@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace MyBank
 {
@@ -26,10 +27,15 @@ namespace MyBank
                 {
                     selectedAccount = account;
                 }
+                //else
+                //{
+                //    Console.WriteLine("Access denied.");
+                //    System.Environment.Exit(1);
+                //}
             }
             if (selectedAccount.AccountNumber != Int32.Parse(accountNumber))
             {
-                Console.WriteLine("denied");
+                Console.WriteLine("Access denied.");
                 System.Environment.Exit(1);
             }
             Console.WriteLine("Please enter your pin number: ");
@@ -41,7 +47,7 @@ namespace MyBank
                 string pinNumber = Console.ReadLine();
                 if (Int32.Parse(pinNumber) == selectedAccount.Pin)
                 {
-                    Console.WriteLine("you have access.");
+                    Console.WriteLine("\nAccess granted.\n");
                     AuthenticatedAccount = selectedAccount;
                     break;
                 }
@@ -55,6 +61,24 @@ namespace MyBank
                     }
                 }
             }
+        }
+        public static string ValidEntryCheck(string usersEntry)
+        {
+            //while (!Int32.TryParse(usersEntry, out int invalidEntry))
+            //{
+            //    Console.WriteLine("Error - write only numbers");
+            //    string newUsersEntry = Console.ReadLine();
+
+            //}
+          
+            Regex acceptedEntry = new Regex(@"^[0-9]*$");
+            
+            while(!acceptedEntry.IsMatch(usersEntry))
+            {
+                Console.WriteLine("Invalid, try again.");
+                usersEntry = Console.ReadLine();
+            } 
+            return usersEntry;
         }
     }
 }

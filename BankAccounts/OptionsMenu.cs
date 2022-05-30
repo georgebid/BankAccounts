@@ -10,8 +10,8 @@ namespace MyBank
         {
             "withdraw",
             "deposit",
-            "view Balance",
-            "change Pin",
+            "view balance",
+            "change pin",
             "cancel"
         };
         public BankAccount AuthedAccount { get; set; }
@@ -24,37 +24,48 @@ namespace MyBank
         ChangePin changePin = new ChangePin();
         CheckBalance checkBalance = new CheckBalance();
         Deposit deposit = new Deposit();
+        Withdraw withdraw = new Withdraw();
 
         public void Option()
         {
-            Console.WriteLine("What would you like to do? \n \n - Withdraw \n - Deposit \n - View Balance \n - Change Pin \n - Cancel ");
-            string usersChoice = Console.ReadLine();
+            Console.WriteLine("What would you like to do? \n");
 
-            if (Options.Contains(usersChoice.ToLower()))
+            foreach (string option in Options)
+            {
+                Console.WriteLine(option);
+            }
+            //Console.WriteLine("What would you like to do? \n \n - Withdraw \n - Deposit \n - View Balance \n - Change Pin \n - Cancel ");
+            string usersChoice = Console.ReadLine().ToLower();
+
+            if (Options.Contains(usersChoice))
             {
                 Console.WriteLine($"You have chosen to {usersChoice}");
 
                 //if (choice.ToString() == "View Balance")
-                if (usersChoice == "View Balance")
+                if (usersChoice == "view balance")
                 {
                     checkBalance.Balance(AuthedAccount);
                 }
                 //if (choice.ToString() == "Change Pin")
-                if (usersChoice == "Change Pin")
+                if (usersChoice == "change pin")
                 {
                     changePin.UpdatePin(AuthedAccount);
                 }
-                if (usersChoice == "Cancel")
+                if (usersChoice == "cancel")
                 {
                     Console.WriteLine("Transaction cancelled.");
                     Console.Beep();
                 }
-                if (usersChoice == "Deposit")
+                if (usersChoice == "deposit")
                 {
-                    deposit.depositMoney(AuthedAccount);
+                    deposit.DepositMoney(AuthedAccount);
+                }
+                if (usersChoice == "withdraw")
+                {
+                    withdraw.WithdrawMoney(AuthedAccount);
                 }
             }
-            else            {
+            else {
                 Console.WriteLine("That is not an option.");
             }
 

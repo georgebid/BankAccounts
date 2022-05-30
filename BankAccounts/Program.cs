@@ -23,10 +23,7 @@ namespace myBank
 
             //CheckBalance balance = new CheckBalance();
             //balance.Balance();
-
-
-            
- //Console.WriteLine(authAccount.Balance);
+            //Console.WriteLine(authAccount.Balance);
         }
     }
 }

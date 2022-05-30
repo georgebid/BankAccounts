@@ -7,17 +7,19 @@ namespace MyBank
     public class Deposit
     {
         public BankAccount AuthedAccount { get; set; }
-        public void depositMoney(BankAccount AuthedAccount)
+        public void DepositMoney(BankAccount AuthedAccount)
         {
 
             Console.WriteLine("How much money would you like to deposit?");
             string usersMoney = Console.ReadLine();
-
+            // int invalidEntry;
+           
+            usersMoney = Authentication.ValidEntryCheck(usersMoney);
 
             decimal newTotal = AuthedAccount.Balance + Int32.Parse(usersMoney);
             AuthedAccount.Balance = newTotal;
 
-            Console.WriteLine(newTotal);
+           // Console.WriteLine(newTotal);
 
             Database database = new Database(AuthedAccount);
 
